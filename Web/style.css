@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'Pacifico';
+    src: url('Fonts/Pacifico.ttf');
+}
+
+body
+{
+/*	background-color:yellow;*/
+	background: url("Pics/valise.jpg") fixed repeat;
+	opacity: 0.9;
+}
+p, H2
+{
+	color: blue;
+	font-family: Arial, "Arial Black";
+	border: 3px blue dashed;
+	border-radius: 10px;
+	/*    src: url('MiSuperFuente.ttf');http://www.fontsquirrel.com/*/
+}
+H1
+{
+	color: red;
+	font-size: 5em;
+	font-family: 'Pacifico';
+}
+li
+{
+	color: rgba(240,96,204,0.5);
+	font-size: 200%;
+	text-align: justify;
+}
+ol
+{
+	color: purple;
+	font-size: 40;
+}
+.class1
+{
+	color: orange;
+	font-size: 5ex;	
+	text-decoration: overline;
+	text-align: center;
+	/*overline;*/
+}
+em
+{
+	font-style:italic;
+	text-decoration: underline;
+}
+strong
+{
+	font-style:italic;
+	font-weight:normal;
+}
+.test-float
+{
+	float: Left;
+}
+.debajo
+{
+	clear:both
+}
