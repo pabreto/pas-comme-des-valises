@@ -3,26 +3,41 @@
     src: url('Fonts/Pacifico.ttf');
 }
 
-body
+/*body
 {
-/*	background-color:yellow;*/
-	background: url("Pics/valise.jpg") fixed repeat;
+	background-color:yellow;
+	background: url("Pics/test/valise.jpg") fixed repeat;
 	opacity: 0.9;
+}
+*/
+
+.flags
+{
+	float:left;
 }
 p, H2
 {
 	color: blue;
 	font-family: Arial, "Arial Black";
-	border: 3px blue dashed;
+/*	border: 3px blue dashed;
 	border-radius: 10px;
-	/*    src: url('MiSuperFuente.ttf');http://www.fontsquirrel.com/*/
-}
+	src: url('MiSuperFuente.ttf');http://www.fontsquirrel.com/
+	*/
+	}
+
 H1
 {
 	color: red;
 	font-size: 5em;
 	font-family: 'Pacifico';
 }
+
+H1:hover
+{
+	color: blue;
+	font-size: 5em;
+}
+
 li
 {
 	color: rgba(240,96,204,0.5);
