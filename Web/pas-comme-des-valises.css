@@ -3,7 +3,17 @@
     src: url('Fonts/Pacifico.ttf');
 }
 
-.flags
+
+img.resize{
+	width:50px;
+	height:auto;
+}
+
+body
 {
+    background-image: url("Pics/icono-maleta.jpg");
+	background-repeat: no-repeat;
+}
+flags{
 	
 }
