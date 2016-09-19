@@ -9,11 +9,8 @@ img.resize{
 	height:auto;
 }
 
-body
+<!body
 {
-    background-image: url("Pics/icono-maleta.jpg");
+    background-image: url("Pics/fondo-maleta.jpg");
 	background-repeat: no-repeat;
-}
-flags{
-	
-}
+}/>
