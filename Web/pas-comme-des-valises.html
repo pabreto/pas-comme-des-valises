@@ -3,7 +3,20 @@
 	<head>
 		<title>"Pas comme des valises"</title>
 		<meta charset="utf-8" ></code>
+		<meta name="viewport" content="initial-scale=1.0">
 		<link rel="stylesheet" href="pas-comme-des-valises.css" />
+		<style>
+      html, body {
+        height: 100%;
+        margin: 20;
+        padding: 200;
+      }
+      #map {
+        height: 50%;
+		margin: 20;
+        padding: 200;
+      }
+    </style>
 	</head>
 	<body>
 		</header>
@@ -14,33 +27,89 @@
 				<a href="no-como-maletes.html"><img  style="float:right" class="resize" src="Pics/flag-catalonia.jpg" alt="cat" title="cat"></a>
 				<a href="not-like-suitcases.html"><img  style="float:right" class="resize" src="Pics/flag-uk.png" alt="eng" title="eng"></a>
 			</p>
-			<nav>
+<!--		
+	<nav>
+-->
 				<a href="#">Accueil</a>
 					<p> </p>
 				<a href="#">Le concept</a>
 					<p> "Et si on ouvrait les yeux et qu'on arrêtait de voyager comme des valises enfermées dans un coffre? Tu t'es déjà demandé tous ce que tu perdais en ne t'écartant pas de ta route? Ce que tu pourrais gagner en "perdant" une demie heure?
 						Et bien ce site est fait pour toi! Introduis ton point de départ, ton point d'arrivée, le nombre d'arrêts que tu es prêt à faire et tes centres d'intéret (sites naturels, musées, villages classés, ...) et découvre comment ne plus passer à côté de ce qui t'entoure" </p>
-				<a href="#">Les données</a>
+<!--		
+					</nav>	
+-->
+
+		</header>
+		<form>
+	Point de départ:<br>
+	<input type="text" name="departure"><br>
+	Destination:<br>
+	<input type="text" name="arrival"><br>
+	Nombre d'arrêts:<br>
+	<input type="radio" name="nb_stops" value="1"> 1
+	<input type="radio" name="nb_stops" value="2"> 2
+	<input type="radio" name="nb_stops" value="3"> 3
+	<br>
+	Détour maximum:<br>
+	<input type="text" name="detour">
+	<input type="radio" name="units_detour" value="km"> km
+	<input type="radio" name="units_detour" value="heures"> h
+	<input type="radio" name="units_detour" value="min"> min <br> 
+	Je veux découvrir... <br>
+	<input type="checkbox" name="interest_category" value="Unesco"> Sites classés de l'Unesco <br>
+	<input type="checkbox" name="interest_category" value="museum"> Musées <br>
+	<input type="checkbox" name="interest_category" value="other"> Autres <br>
+	<input type="submit" value="C'est parti">
+  </form>
+		<div id="map"></div>
+		<script>
+var map;
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 41.5, lng: 2},
+    zoom: 10
+  });
+}
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-DclMWk7HxK6EFs5ema2f5zJdpUh_DHk&callback=initMap"
+        async defer></script>
+		
+	<script>
+	function convert_site_to_coords(site){
+		return site.lon site.lat
+	}
+
+	function dst(a,b){
+		return dst
+	}
+	
+	function  search_sites_in_circle(departure,arrival,interest){
+		nb_sites=0
+		for (site in interest_category){
+			if (site in circle){ add site to selected_sites; nb_sites++ }
+		}
+	}
+
+	function generate_sites_combinations(selected_sites,nb_stops){
+		return "k nb_stops-uples of sites"
+	}
+
+	function generate_route(departure,arrival,list_nb_stops-uples){
+		for ( array in list_nb_stops-uples ){
+			if (length(route(array))<length(route(departure,arrival))+detour){
+				return array
+			}
+		}
+	}
+	</script>
+
+	<a href="#">Les données</a>
 					<ul>
 						<li> <a href="http://atlas.patrimoines.culture.fr/atlas/trunk/"> Atlas des patrimoines français</a>
 						<li> <a href="http://whc.unesco.org/fr/carte-interactive/"> Patrimoine mondial de l'Unesco </a>
 					</ul>
 				<a href="#">Participe!</a>
 					<p> Tu veux proposer un site que tu aimerais partager pour les gens découvrent en passant? Contacte-nous en remplissant ce formulaire: </p>
-			</nav>
-		</header>
-		<div id="map"></div>
-		<script type=text/javascript>
-var map;
-function initMap(){
-	map = new google.maps.Map(document.getElementById('map'), {
-		center: {lat: -34.397, lng: 150.644},
-		zoom: 8
-	});
-}
-		</script>
-		<script async defer 
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-DclMWk7HxK6EFs5ema2f5zJdpUh_DHk&callback=initMap">
-		</script>
 	</body>
 </html>
