@@ -5,6 +5,7 @@
 		<meta charset="utf-8" ></code>
 		<meta name="viewport" content="initial-scale=1.0">
 		<link rel="stylesheet" href="pas-comme-des-valises.css" />
+		<!-- 		<script type="text/javascript" src="functions.js"></script>-->
 		<style>
       html, body {
         height: 100%;
@@ -41,8 +42,8 @@
 
 		</header>
 		<form>
-	Point de départ:<br>
-	<input type="text" name="departure"><br>
+	 Point de départ:<br>
+      <input id="address" type="textbox" value="Départ"><br>
 	Destination:<br>
 	<input type="text" name="arrival"><br>
 	Nombre d'arrêts:<br>
@@ -59,50 +60,51 @@
 	<input type="checkbox" name="interest_category" value="Unesco"> Sites classés de l'Unesco <br>
 	<input type="checkbox" name="interest_category" value="museum"> Musées <br>
 	<input type="checkbox" name="interest_category" value="other"> Autres <br>
-	<input type="submit" value="C'est parti">
+	      <input id="submit" type="button" value="C'est parti!"><br>
+
   </form>
-		<div id="map"></div>
-		<script>
-var map;
+  <!--		
+
+<div id="floating-panel">
+-->
+	 
+<!--	  
+    </div>
+--> 
+ <div id="map"></div>
+    <script>
 function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 41.5, lng: 2},
-    zoom: 10
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: {lat: -34.397, lng: 150.644}
+  });
+  var geocoder = new google.maps.Geocoder();
+
+  document.getElementById('submit').addEventListener('click', function() {
+    geocodeAddress(geocoder, map);
+  });
+}
+
+function geocodeAddress(geocoder, resultsMap) {
+  var address = document.getElementById('address').value;
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      resultsMap.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
   });
 }
 
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-DclMWk7HxK6EFs5ema2f5zJdpUh_DHk&callback=initMap"
-        async defer></script>
-		
-	<script>
-	function convert_site_to_coords(site){
-		return site.lon site.lat
-	}
 
-	function dst(a,b){
-		return dst
-	}
-	
-	function  search_sites_in_circle(departure,arrival,interest){
-		nb_sites=0
-		for (site in interest_category){
-			if (site in circle){ add site to selected_sites; nb_sites++ }
-		}
-	}
 
-	function generate_sites_combinations(selected_sites,nb_stops){
-		return "k nb_stops-uples of sites"
-	}
-
-	function generate_route(departure,arrival,list_nb_stops-uples){
-		for ( array in list_nb_stops-uples ){
-			if (length(route(array))<length(route(departure,arrival))+detour){
-				return array
-			}
-		}
-	}
-	</script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-DclMWk7HxK6EFs5ema2f5zJdpUh_DHk&signed_in=true&callback=initMap"
+      async defer></script>
 
 	<a href="#">Les données</a>
 					<ul>
