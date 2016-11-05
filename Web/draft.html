@@ -1,0 +1,47 @@
+    <script>
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 6,
+    center: {lat: 46.227638, lng: 2.213749} /*France*/
+	/*    center: {lat: 40.463667, lng: -3.74922} /* España
+    center: {lat: 41.591158, lng: 1.520862} /* Catalunya
+	*/
+	});
+  var geocoder = new google.maps.Geocoder();
+
+  document.getElementById('submit').addEventListener('click', function() {
+    geocodeAddress(geocoder, map);
+  });
+}
+
+function geocodeAddress(geocoder, resultsMap) {
+  var address = document.getElementById('address').value;
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      resultsMap.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+
+    </script>
+	
+	
+	    <div id="type-selector" class="controls">
+      <input type="radio" name="type" id="changetype-all" checked="checked">
+      <label for="changetype-all">All</label>
+
+      <input type="radio" name="type" id="changetype-establishment">
+      <label for="changetype-establishment">Establishments</label>
+
+      <input type="radio" name="type" id="changetype-address">
+      <label for="changetype-address">Addresses</label>
+
+      <input type="radio" name="type" id="changetype-geocode">
+      <label for="changetype-geocode">Geocodes</label>
+    </div>
