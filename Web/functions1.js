@@ -1,11 +1,25 @@
 function initMap() {
- 
+	
+    if( language == "french" ){
+		var center = {lat: 46.227638, lng: 2.213749};
+		var zoom = 6;
+	}
+	else if ( language == "spanish" ){
+		var center = {lat: 39.263667, lng: -3.74922};
+		var zoom = 6;
+	}
+	else if ( language == "catalan" ){
+		var center = {lat: 41.591158, lng: 1.520862};
+		var zoom = 7;
+	}
+	else if ( language == "english" ){
+		var center = {lat: 41.591158, lng: 1.520862};
+		var zoom = 7;
+	}
+		
    var map = new google.maps.Map(document.getElementById('map'), {
-	zoom: 7,
-    center: {lat: 41.591158, lng: 1.520862},
-	 /*   center: {lat: 46.227638, lng: 2.213749}  /*France
-	 center: {lat: 40.463667, lng: -3.74922} /* España
-    center: {lat: 41.591158, lng: 1.520862} zoom: 7/* Catalunya */
+	zoom: zoom,
+    center: center,
   });
   
     // Instantiate a directions service.
