@@ -16,31 +16,34 @@ function initMap() {
 		var center = {lat: 41.591158, lng: 1.520862};
 		var zoom = 7;
 	}
-		
+	
+ //  var bounds = new google.maps.LatLngBounds();	
+   
    var map = new google.maps.Map(document.getElementById('map'), {
 	zoom: zoom,
     center: center,
   });
   
     // Instantiate a directions service.
-    directionsService = new google.maps.DirectionsService,
-    directionsDisplay = new google.maps.DirectionsRenderer({
-      map: map
-    })
+ //   directionsService = new google.maps.DirectionsService ;
+ //   directionsDisplay = new google.maps.DirectionsRenderer({
+ //     map: map
+ //   })
+	
   var departure = /** @type {!HTMLInputElement} */(
       document.getElementById('departure'));
 	  
   var arrival = /** @type {!HTMLInputElement} */(
      document.getElementById('arrival'));
 	  
- /* var types = document.getElementById('type-selector');*/
   var autocomplete = new google.maps.places.Autocomplete(departure);
-  
   autocomplete.bindTo('bounds', map);
  
   var autocomplete_arrival = new google.maps.places.Autocomplete(arrival);
-  autocomplete.bindTo('bounds', map);
-
+//  var new_bounds = bounds.extend(marker_arrival.position);
+ // autocomplete.bindTo('bounds', map);
+ 
+		
   var infowindow = new google.maps.InfoWindow();
   var marker = new google.maps.Marker({
     map: map,
@@ -60,7 +63,9 @@ function initMap() {
       window.alert("Autocomplete's returned place contains no geometry");
       return;
     }
-
+	
+ //   bounds.extend(marker.location) ;
+//	map.fitBounds(bounds) ; 
     // If the place has a geometry, then present it on a map.
     if (place.geometry.viewport) {
       map.fitBounds(place.geometry.viewport);
@@ -68,6 +73,7 @@ function initMap() {
       map.setCenter(place.geometry.location);
       map.setZoom(17);  // Why 17? Because it looks good.
     }
+	
     marker.setIcon(/** @type {google.maps.Icon} */({
       url: place.icon,
       size: new google.maps.Size(71, 71),
@@ -97,6 +103,8 @@ function initMap() {
    // infowindow.close(); 
     marker_arrival.setVisible(false);
     var place = autocomplete_arrival.getPlace();
+	    var place2 = autocomplete.getPlace();
+
     if (!place.geometry) {
       window.alert("Autocomplete's returned place contains no geometry");
       return;
@@ -132,10 +140,38 @@ function initMap() {
  infowindow.setContent('<div><strong>' + place.name );
 // infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
    infowindow.open(map, marker_arrival); 
-	
+	var directionsDisplay = new google.maps.DirectionsRenderer({
+          map: map
+        });
+var chicago = {lat: 41.85, lng: -87.65};
+        var indianapolis = {lat: 39.79, lng: -86.14};
+        // Set destination, origin and travel mode.
+		
+        var request = {
+          destination: place.geometry.location,
+          origin: place2.geometry.location,
+          travelMode: 'DRIVING'
+        };
+
+        // Pass the directions request to the directions service.
+
+        var DirectionsService = new google.maps.DirectionsService();
+		
+        DirectionsService.route(request, function(response, status) {
+          if (status == 'OK') {
+            // Display the route on the map.
+            directionsDisplay.setDirections(response);
+          }
+        });	
   });
- 
-  calculateAndDisplayRoute(directionsService, directionsDisplay, autocomplete, autocomplete_arrival);
+  
+  
+	
+
+	
+
+  
+//  calculateAndDisplayRoute(directionsService, directionsDisplay, autocomplete, autocomplete_arrival);
 
  
 }
