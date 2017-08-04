@@ -116,7 +116,7 @@ function loadXMLDoc() {
     }
   };
 //  xmlhttp.open("GET", xml, true);
-  xmlhttp.open("GET", "whc-fr.xml", true);
+  xmlhttp.open("GET", "../Docs/whc-fr.xml", true);
 
   xmlhttp.send();
 }
