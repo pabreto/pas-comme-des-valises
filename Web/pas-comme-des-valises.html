@@ -5,7 +5,7 @@
 		<meta charset="utf-8" ></code>
 		<meta name="viewport" content="initial-scale=1.0">
 		<link rel="stylesheet" href="pas-comme-des-valises.css" />
-		<script type="text/javascript" src="functions1.js"></script>
+		<script type="text/javascript" src="functions.js"></script>
 		<style>
       html, body {
         height: 100%;
@@ -20,6 +20,9 @@
     </style>
 	</head>
 	<body>
+
+
+
 	<script>
 		var language = "french";
 	</script>
@@ -54,7 +57,7 @@
     placeholder="Tape ta destination"><br>
 	
 	Je veux découvrir... <br>
-	<input type="checkbox" name="interest_category" value="Unesco"> Sites classés de l'Unesco <br>
+	<input type="checkbox" name="interest_category" value="Unesco" onclick="loadXMLDoc()"> Sites classés de l'Unesco <br>
 	<input type="checkbox" name="interest_category" value="museum"> Musées <br>
 	<input type="checkbox" name="interest_category" value="other"> Autres <br>
 	Nombre d'arrêts:<br>
@@ -68,13 +71,19 @@
 	<input type="radio" name="units_detour" value="heures"> h
 	<input type="radio" name="units_detour" value="min"> min <br> <br>
 
+<p id="demo"></p>
 
-    <div id="map"></div>
-    
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-DclMWk7HxK6EFs5ema2f5zJdpUh_DHk&signed_in=true&libraries=places&callback=initMap"
+<!--
+<button type="button" onclick="loadXMLDoc()">
+¡Vamos!</button>
+-->
+
+
+   <div id="map"></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-DclMWk7HxK6EFs5ema2f5zJdpUh_DHk&signed_in=true&libraries=places&callback=initMap"
       async defer></script>
-
-	<a href="#">Les données</a>
+  
+  <a href="#">Les données</a>
 					<ul>
 						<li> <a href="http://atlas.patrimoines.culture.fr/atlas/trunk/"> Atlas des patrimoines français</a>
 						<li> <a href="http://whc.unesco.org/fr/carte-interactive/"> Patrimoine mondial de l'Unesco </a>
