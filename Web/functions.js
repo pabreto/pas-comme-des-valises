@@ -122,12 +122,24 @@ function loadXMLDoc() {
 }
 
 function myFunction(xml) {
-  var x, i, xmlDoc, txt;
+//  var x, i, xmlDoc, txt;
+  var lon_musee, lat_musee, i, xmlDoc, txt;
   xmlDoc = xml.responseXML;
   txt = "";
-  x = xmlDoc.getElementsByTagName("longitude");
-  for (i = 0; i< x.length; i++) {
-    txt += x[i].childNodes[0].nodeValue + "<br>";
-  }
+
+//  x = xmlDoc.getElementsByTagName("longitude");
+  lat_musee = xmlDoc.getElementsByTagName("latitude");
+  lon_musee = xmlDoc.getElementsByTagName("longitude");
+  for (i = 0; i< lon_musee.length; i++) {
+	  txt += lon_musee[i].childNodes[0].nodeValue + "<br>";
+      latLng = new google.maps.LatLng(lat_musee[i],lon_musee[i]);
+      marker = new google.maps.Marker({
+           position: latLng,
+            map: map
+          });  
+ }
   document.getElementById("demo").innerHTML = txt;
 }
+
+
+ //     
