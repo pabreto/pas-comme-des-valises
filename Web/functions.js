@@ -35,8 +35,6 @@ function initMap() {
 
  }
 
-      // Sets a listener on a radio button to change the filter type on Places
-      // Autocomplete.
       AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
         var radioButton = document.getElementById(id);
         var me = this;
