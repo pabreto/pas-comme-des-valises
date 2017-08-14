@@ -6,50 +6,102 @@ function initMap() {
 	 center: {lat: 40.463667, lng: -3.74922} /* España
     center: {lat: 41.591158, lng: 1.520862} zoom: 7/* Catalunya */
   });
-  
-    // Instantiate a directions service.
-    directionsService = new google.maps.DirectionsService,
-    directionsDisplay = new google.maps.DirectionsRenderer({
-      map: map
-    })
-  var departure = /** @type {!HTMLInputElement} */(
-      document.getElementById('departure'));
-	  
-  var arrival = /** @type {!HTMLInputElement} */(
-     document.getElementById('arrival'));
-	  
- /* var types = document.getElementById('type-selector');*/
-  var autocomplete = new google.maps.places.Autocomplete(departure);
-  
-  autocomplete.bindTo('bounds', map);
- 
-  var autocomplete_arrival = new google.maps.places.Autocomplete(arrival);
-  autocomplete.bindTo('bounds', map);
+          new AutocompleteDirectionsHandler(map);
 
+}
+     function AutocompleteDirectionsHandler(map) {
+        this.map = map;
+        this.originPlaceId = null;
+        this.destinationPlaceId = null;
+        this.travelMode = 'WALKING';
+        var originInput = document.getElementById('departure');
+        var destinationInput = document.getElementById('arrival');
+        var modeSelector = document.getElementById('mode-selector');
+        this.directionsService = new google.maps.DirectionsService;
+        this.directionsDisplay = new google.maps.DirectionsRenderer;
+        this.directionsDisplay.setMap(map);
+
+        var originAutocomplete = new google.maps.places.Autocomplete(
+            originInput);
+        var destinationAutocomplete = new google.maps.places.Autocomplete(
+            destinationInput);
+
+        this.setupClickListener('changemode-walking', 'WALKING');
+        this.setupClickListener('changemode-transit', 'TRANSIT');
+        this.setupClickListener('changemode-driving', 'DRIVING');
+
+        this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
+        this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
+
+ }
+
+      // Sets a listener on a radio button to change the filter type on Places
+      // Autocomplete.
+      AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
+        var radioButton = document.getElementById(id);
+        var me = this;
+        radioButton.addEventListener('click', function() {
+          me.travelMode = mode;
+          me.route();
+        });
+      };
+
+      AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
+        var me = this;
+        autocomplete.bindTo('bounds', this.map);
+        autocomplete.addListener('place_changed', function() {
+          var place = autocomplete.getPlace();
+          if (!place.place_id) {
+            window.alert("Please select an option from the dropdown list.");
+            return;
+          }
+          if (mode === 'ORIG') {
+            me.originPlaceId = place.place_id;
+          } else {
+            me.destinationPlaceId = place.place_id;
+          }
+          me.route();
+        });
+
+      };
+
+      AutocompleteDirectionsHandler.prototype.route = function() {
+        if (!this.originPlaceId || !this.destinationPlaceId) {
+          return;
+        }
+        var me = this;
+		var waypoints = new Array();
+			waypoints[0] = new google.maps.LatLng(41.591158,1.520862); 
+			waypoints[1] = new google.maps.LatLng(46.227638,2.213749); 
+        this.directionsService.route({
+          origin: {'placeId': this.originPlaceId},
+          destination: {'placeId': this.destinationPlaceId},
+		  waypoints:  [{location:waypoints[0]},
+		  {location:waypoints[1]}],
+		  optimizeWaypoints: true,
+          travelMode: this.travelMode
+        }, function(response, status) {
+          if (status === 'OK') {
+            me.directionsDisplay.setDirections(response);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      };
+/*
   var infowindow = new google.maps.InfoWindow();
   var marker = new google.maps.Marker({
     map: map,
     anchorPoint: new google.maps.Point(0, -29)
   });
+  var marker_arrival = new google.maps.Marker({
+    map: map,
+    anchorPoint: new google.maps.Point(0, -29)
+  });
+*/
 
-  autocomplete.addListener('place_changed', function() {
-    infowindow.close(); 
-    marker.setVisible(false);
-    var place = autocomplete.getPlace();
-    if (!place.geometry) {
-      window.alert("Autocomplete's returned place contains no geometry");
-      return;
-    }
-
-    // If the place has a geometry, then present it on a map.
-    if (place.geometry.viewport) {
-      map.fitBounds(place.geometry.viewport);
-    } else {
-      map.setCenter(place.geometry.location);
-      map.setZoom(17);  // Why 17? Because it looks good.
-    }
-    marker.setIcon(/** @type {google.maps.Icon} */({
-      url: place.icon,
+ //   marker.setIcon(/** @type {google.maps.Icon} */({
+ /*     url: place.icon,
       size: new google.maps.Size(71, 71),
       origin: new google.maps.Point(0, 0),
       anchor: new google.maps.Point(17, 34),
@@ -57,42 +109,8 @@ function initMap() {
     }));
     marker.setPosition(place.geometry.location);
     marker.setVisible(true);
-
-    var address = '';
-    if (place.address_components) {
-      address = [
-        (place.address_components[0] && place.address_components[0].short_name || ''),
- //       (place.address_components[1] && place.address_components[1].short_name || ''),
- //       (place.address_components[2] && place.address_components[2].short_name || '')
-      ].join(' ');
-    }
-
- 
- infowindow.setContent('<div><strong>' + place.name );
-// infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-   infowindow.open(map, marker); 
-	
-  });
-  
-
-  calculateAndDisplayRoute(directionsService, directionsDisplay, autocomplete, autocomplete_arrival);
-  
-  // Sets a listener on a radio button to change the filter type on Places
-  // Autocomplete.
-/*  function setupClickListener(id, types) {
-    var radioButton = document.getElementById(id);
-    radioButton.addEventListener('click', function() {
-      autocomplete.setTypes(types);
-    });
-  }
 */
-/*  setupClickListener('changetype-all', []);
-*/
-/*  setupClickListener('changetype-address', ['address']);*/
-/*  setupClickListener('changetype-establishment', ['establishment']);
-  setupClickListener('changetype-geocode', ['geocode']);
-*/
-}
+
 
   function calculateAndDisplayRoute(directionsService, directionsDisplay, autocomplete, autocomplete_arrival) {
   directionsService.route({

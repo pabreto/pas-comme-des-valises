@@ -28,9 +28,9 @@
         this.directionsDisplay.setMap(map);
 
         var originAutocomplete = new google.maps.places.Autocomplete(
-            originInput, {placeIdOnly: true});
+            originInput);
         var destinationAutocomplete = new google.maps.places.Autocomplete(
-            destinationInput, {placeIdOnly: true});
+            destinationInput);
 
         this.setupClickListener('changemode-walking', 'WALKING');
         this.setupClickListener('changemode-transit', 'TRANSIT');
