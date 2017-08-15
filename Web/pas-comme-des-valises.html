@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>"Pas comme des valises"</title>
-		<meta charset="utf-8" ></code>
+		<meta charset="utf-8" >
 		<meta name="viewport" content="initial-scale=1.0">
 		<link rel="stylesheet" href="pas-comme-des-valises.css" />
 		<script type="text/javascript" src="functions.js"></script>
@@ -26,7 +26,7 @@
 	<script>
 		var language = "french";
 	</script>
-		</header>
+		<header>
 			<h1>Pas comme des valises - Voyagez autrement!</h1>
 			<p class=flags>
 				<a href="pas-comme-des-valises.html"><img  style="float:right" class="resize" src="Pics/flag-france.png" alt="fr" title="fr"></a>
@@ -60,11 +60,13 @@
 	<input type="checkbox" name="interest_category" value="Unesco" onclick="loadXMLDoc()"> Sites classés de l'Unesco <br>
 	<input type="checkbox" name="interest_category" value="museum"> Musées <br>
 	<input type="checkbox" name="interest_category" value="other"> Autres <br>
+<!--
 	Nombre d'arrêts:<br>
 	<input id="nb_stops" type="radio" value="1"> 1
 	<input id="nb_stops" type="radio" value="2"> 2
 	<input id="nb_stops" type="radio" value="3"> 3
 	<br>
+-->	
 	Détour maximum:<br>
 	<input type="text" name="detour">
 	<input type="radio" name="units_detour" value="km"> km
@@ -90,7 +92,7 @@
 
 
    <div id="map"></div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-DclMWk7HxK6EFs5ema2f5zJdpUh_DHk&signed_in=true&libraries=places&callback=initMap"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-DclMWk7HxK6EFs5ema2f5zJdpUh_DHk&libraries=places&callback=initMap"
       async defer></script>
   
   <a href="#">Les données</a>

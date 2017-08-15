@@ -1,7 +1,8 @@
+
 function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
+	map = new google.maps.Map(document.getElementById('map'), {
 	zoom: 7,
-    center: {lat: 41.591158, lng: 1.520862},
+	center: {lat: 41.591158, lng: 1.520862}
 	 /*   center: {lat: 46.227638, lng: 2.213749}  /*France
 	 center: {lat: 40.463667, lng: -3.74922} /* España
     center: {lat: 41.591158, lng: 1.520862} zoom: 7/* Catalunya */
@@ -74,9 +75,10 @@ function initMap() {
         this.directionsService.route({
           origin: {'placeId': this.originPlaceId},
           destination: {'placeId': this.destinationPlaceId},
-		  waypoints:  [{location:waypoints[0]},
+/*		  waypoints:  [{location:waypoints[0]},
 		  {location:waypoints[1]}],
 		  optimizeWaypoints: true,
+*/
           travelMode: this.travelMode
         }, function(response, status) {
           if (status === 'OK') {
@@ -125,15 +127,20 @@ function myFunction(xml) {
 //  x = xmlDoc.getElementsByTagName("longitude");
   lat_musee = xmlDoc.getElementsByTagName("latitude");
   lon_musee = xmlDoc.getElementsByTagName("longitude");
-  for (i = 0; i< lon_musee.length; i++) {
-	  txt += lon_musee[i].childNodes[0].nodeValue + "<br>";
-      latLng = new google.maps.LatLng(lat_musee[i],lon_musee[i]);
+//  for (i = 0; i< lon_musee.length; i++) {
+  for (i = 0; 0; i++) {
+//	  txt += lat_musee[i].childNodes[0].nodeValue + "<br>"+ lat_musee[i].childNodes[0].nodeValue;
+//      latLng = new google.maps.LatLng(lat_musee[i],lon_musee[i]);
+//      latLng = new google.maps.LatLng(41.591158,1.520862);
+	  var myLatLng = {lat: -25.363, lng: 131.044};
+
       marker = new google.maps.Marker({
-           position: latLng,
-            map: map
+//           position: latLng,
+           position: myLatLng,
+            setMap: map
           });  
  }
-  document.getElementById("demo").innerHTML = txt;
+//  document.getElementById("demo").innerHTML = txt;
 }
 
 

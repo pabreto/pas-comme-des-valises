@@ -1,0 +1,17 @@
+TODO LIST
+
+*create app that advises you, based on your profile (max distance, interests) and your location, when you are close to a site.
+
+*add marker when introducing departure
+
+*add list dépliante with subcategories for interest sites
+
+
+Algorithm details:
+*on click on categories: adds markers with names of the place + panel with list of sites (+ description?), that can be unselected (selected by default if they comply with the conditions below)
+	if they are in the map (to be updated when map moves)
+	if departure and arrival are selected -> if they are in the circle (/square) between departure and arrival 
+	if max detour is selected -> remove points that, INDIVIDUALLY, make a greater detour than the max selected (calculating for each point the )
+then, and only then, when max 3 stops are selected, print new route 
+
+* when selected number of stops and max detour, run the calc route functions
